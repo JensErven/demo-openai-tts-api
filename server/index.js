@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const cors = require("cors");
 const openai = require("openai");
 require("dotenv").config();
+const fs = require("fs");
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 
