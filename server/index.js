@@ -5,7 +5,7 @@ const server = require("http").createServer(app);
 const cors = require("cors");
 const OpenAI = require("openai");
 require("dotenv").config();
-const fs = require("fs");
+const fs = require("node:fs");
 const path = require("path");
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
@@ -41,15 +41,10 @@ app.post("/generate-speech", async (req, res) => {
       input: text,
     });
 
-    const audioBuffer = Buffer.from(await mp3.arrayBuffer());
+    const audioBuffer = Buffer.from(await mp3.buffer());
 
     // Generating a unique file name based on timestamp for each speech request
-    const speechFile = path.resolve(`./speech-${Date.now()}.mp3`);
-
-    // Writing the audio buffer to a file
-    await fs.promises.writeFile(speechFile, audioBuffer);
-
-    res.sendFile(speechFile);
+    res.send(audioBuffer);
   } catch (error) {
     console.error("Error generating speech:", error);
     res.status(500).send("Speech generation failed");
