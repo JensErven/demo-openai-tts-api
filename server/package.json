@@ -17,6 +17,7 @@
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "nodemon": "^3.0.1",
-    "openai": "^4.20.1"
+    "openai": "^4.20.1",
+    "path": "^0.12.7"
   }
 }
