@@ -7,10 +7,10 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 function App() {
-  const isDevelopment = true;
+  const isDevelopment = false;
   const apiURL = isDevelopment
     ? "http://localhost:5000"
-    : "https://videochat-backend.onrender.com";
+    : "https://demo-openai-tts-api-backend-v2.onrender.com";
 
   const options = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
   const defaultOption = options[0];
