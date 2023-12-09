@@ -15,14 +15,21 @@ const openai = new OpenAI({ apiKey });
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "demo-openai-tts-api-git-main-jenserven.vercel.app",
+  "https://demo-openai-tts-api-git-main-jenserven.vercel.app",
+  "https://demo-openai-tts-api.vercel.app",
  
 ];
 
 
 const corsOptions = {
-  origin: allowedOrigins,
-  methods: ["GET", "POST"], // Specify the allowed HTTP methods
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST"],
 };
 
 app.use(cors(corsOptions));
