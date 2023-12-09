@@ -10,7 +10,7 @@ const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 
 const openaiClient = new openai.OpenAI({ apiKey });
 
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["http://localhost:3000", "demo-openai-tts-api-jenserven.vercel.app","demo-openai-tts-api-git-main-jenserven.vercel.app"];
 
 const corsOptions = {
   origin: allowedOrigins,
