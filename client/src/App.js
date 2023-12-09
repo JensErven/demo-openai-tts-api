@@ -7,6 +7,11 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 function App() {
+  const isDevelopment = false;
+  const apiURL = isDevelopment
+    ? "http://localhost:5000"
+    : "https://demo-openai-tts-api-backend-v2.onrender.com";
+
   const options = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
   const defaultOption = options[0];
   const [text, setText] = useState("");
@@ -36,7 +41,7 @@ function App() {
     setLoadingSpeech(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/generate-speech",
+        `${apiURL}/generate-speech`,
         { text, selectedVoiceModel },
         {
           responseType: "arraybuffer", // Ensure response is treated as ArrayBuffer

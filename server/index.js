@@ -3,14 +3,22 @@ const app = express(); // Use express() to create the app
 
 const server = require("http").createServer(app);
 const cors = require("cors");
-const openai = require("openai");
+const OpenAI = require("openai");
 require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 
-const openaiClient = new openai.OpenAI({ apiKey });
+const openai = new OpenAI({ apiKey });
 
-const allowedOrigins = ["http://localhost:3000", "demo-openai-tts-api-jenserven.vercel.app","demo-openai-tts-api-git-main-jenserven.vercel.app"];
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://demo-openai-tts-api.vercel.app/",
+  "https://demo-openai-tts-api.vercel.app",
+];
+
 
 const corsOptions = {
   origin: allowedOrigins,
@@ -29,12 +37,15 @@ app.get("/", (req, res) => {
 app.post("/generate-speech", async (req, res) => {
   const { text, selectedVoiceModel } = req.body; // Assuming text is sent in the request body
   try {
-    const mp3 = await openaiClient.audio.speech.create({
+    const mp3 = await openai.audio.speech.create({
       model: "tts-1",
       voice: selectedVoiceModel,
       input: text,
     });
+
     const audioBuffer = Buffer.from(await mp3.buffer());
+
+    // Generating a unique file name based on timestamp for each speech request
     res.send(audioBuffer);
   } catch (error) {
     console.error("Error generating speech:", error);
