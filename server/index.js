@@ -15,8 +15,8 @@ const openai = new OpenAI({ apiKey });
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://demo-openai-tts-api.vercel.app/",
-  "https://demo-openai-tts-api.vercel.app",
+  "demo-openai-tts-api-git-main-jenserven.vercel.app",
+ 
 ];
 
 
